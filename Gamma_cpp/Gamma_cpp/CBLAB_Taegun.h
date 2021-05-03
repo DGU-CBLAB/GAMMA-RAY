@@ -198,6 +198,7 @@ long double t_value(boost::math::students_t_distribution<double> t_dist, long do
 
 void NICE_CPP(std::ifstream& snp, Eigen::MatrixXd& Y, std::string output, double prior_val, double priorAlpha, double priorBeta);
 void NICE_CPP2(std::ifstream& snp, Eigen::MatrixXd& Y, std::string output, double prior_val, double priorAlpha, double priorBeta, int thread_num);
+std::vector<std::string> Gamma_cpp(Eigen::MatrixXd& Kx, Eigen::MatrixXd& Ky, int thread_index, int thread_num);
 
 void computeMvaluesMCMC(double* betas, double* std_, double* std_tm, double* std_tmm, double* std_logt, double* logProbNullPoints_, int sample, int pheno_num, std::string X, Eigen::MatrixXd& Y, Eigen::ArrayXd& P_val, std::ofstream& NICE, double prior_val, double priorAlpha, double priorBeta, int seed = 0);
 Eigen::ArrayXd computeMvaluesMCMC2(double* betas, double* std_, double* std_tm, double* std_tmm, double* std_logt, double* logProbNullPoints_, int sample, int pheno_num, std::string X, Eigen::MatrixXd& Y, Eigen::ArrayXd& P_val, double prior_val, double priorAlpha, double priorBeta, int seed = 0);
