@@ -6,21 +6,21 @@ Original GAMMA paper -> https://doi.org/10.1534/genetics.116.189712
 ### Prerequisites
 
 1. GAMMA_cpp
-'''bash
+```bash
 git clone https://github.com/taegun89/Gamma_cpp.git
-'''
+```
 
 2. Eigen library
-'''bash
+```bash
 wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 tar -zxvf ./eigen-3.4.0.tar.gz
-'''
+```
 
 3. boost library
-'''bash
+```bash
 wget https://archives.boost.io/release/1.86.0/source/boost_1_86_0.tar.gz
 tar -zxvf ./boost_1_86_0.tar.gz
-'''
+```
 
 - Compile
 ```
