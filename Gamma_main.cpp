@@ -5,8 +5,8 @@ int main(int argc, char** argv) {
 	
 	std::ifstream input_x(argv[1]);
 	std::ifstream input_y(argv[2]);
-	std::ofstream out(argv[3]);
-	int thread_num = std::stoi(argv[4]); //input thread number
+	int thread_num = std::stoi(argv[3]); //input thread number
+	std::ofstream out(argv[4]);
 
 	std::vector<double> vc_1;
 	std::vector<double> vc_2;
