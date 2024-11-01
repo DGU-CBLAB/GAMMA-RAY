@@ -36,5 +36,10 @@ g++ -O2 -DNDEBUG -pthread -std=c++14 -I ../eigen-3.4.0/ -I ../boost_1_86_0/ ./Ga
 4. Run
    Gamm_cpp <Genotype file> <Phenotypes file> <threadNums> <output> 
 ```bash 
-./Gamma_cpp ./X.txt ./Y.txt cpm_num ./result.txt
+./Gamma_cpp ./sample_data/X.txt ./sample_data/Y.txt 1 ./result.txt
+```
+
+5. Result
+```
+vim ./result.txt
 ```
