@@ -1,61 +1,34 @@
-# MARSweb
+# GAMMA_cpp
 
-c++ version of MARS(made by Jong Wha J. Joo)<br> 
-Original MARS paper -> https://www.biorxiv.org/content/10.1101/498360v1
-
-## Using Docker 
-
-The Docker image for MARSweb can be found on Docker Hub at [taegun89/marsweb](https://hub.docker.com/r/taegun89/marsweb).
+c++ version of GAMMA(made by Jong Wha J. Joo)<br> 
+Original GAMMA paper -> https://doi.org/10.1534/genetics.116.189712
 
 ### Prerequisites
 
-- Docker (version 19.03 or later)
+1. GAMMA_cpp
+'''bash
+git clone https://github.com/taegun89/Gamma_cpp.git
+'''
 
-### Pull the Docker Image
+2. Eigen library
+'''bash
+wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
+tar -zxvf ./eigen-3.4.0.tar.gz
+'''
 
-To pull the Docker image from Docker Hub, use the following command:
+3. boost library
+'''bash
+wget https://archives.boost.io/release/1.86.0/source/boost_1_86_0.tar.gz
+tar -zxvf ./boost_1_86_0.tar.gz
+'''
 
-```bash
-docker pull taegun89/marsweb:latest
+- Compile
 ```
-
-### Running the Docker Contatiner
-```bash
-docker run -ti \
-  -e MARSweb_username=your_username \
-  -e MARSweb_passwd=your_password \
-  -p 8080:8080 \
-  -v "LDREF_path":/Data/1000genome/LDREF/LDREF
-  taegun89/marsweb:latest
-```
-
-### Start Tomcat Server
-
-To run the Docker container, execute the following command after starting the container
-```
-/MARSweb/apache-tomcat-9.0.64/bin/startup.sh
-```
-After running the command, you can access MARSweb locally at: http://cblab.dongguk.edu:8080/
-
-## Using G++ Compiler
-1. Unzip Eigen Library 
-```
-cd MARScpp
-unzip Eigen.zip -d Eigen
-```
-2. Install boost library 
-```
-wget https://boostorg.jfrog.io/artifactory/main/release/1.74.0/source/boost_1_74_0.tar.gz
-tar -zxvf boost_1_74_0.tar.gz
-cd boost_1_74_0
-./bootstrap.sh
-./b2
-```
-3. Compile
-```
-g++ -O2 -DNDEBUG -std=c++11 -I ./Eigen/ ./Mars_cpp.cpp ./Mars_main.cpp -o MARSweb -I ./boost_1_74_0 
+cd ./Gamma_cpp
+g++ -O2 -DNDEBUG -pthread -std=c++14 -I ../eigen-3.4.0/ -I ../boost_1_86_0/ ./Gamma_main.cpp ./CBLAB_method.cpp -o Gamma_cpp
 ```
 4. Run
-``` 
-./MARSweb -geno ./exam_geno -stat ./exam_stat -sim 10000 -mode 1
+   Gamm_cpp <Genotype file> <Phenotypes file> <threadNums> <output> 
+```bash 
+./Gamma_cpp ./X.txt ./Y.txt cpm_num ./result.txt
 ```
