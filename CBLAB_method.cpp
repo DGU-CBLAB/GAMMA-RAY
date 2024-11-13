@@ -1,4 +1,4 @@
-#include "CBLAB_Taegun.h"
+#include "CBLAB_method.h"
 
 input_MS::input_MS() { //do not use
     mean = 0.0; sum = 0.0; count = 0; squared_residual_sum = 0.0; slope = 0.0; intercept = 0.0;
