@@ -118,7 +118,7 @@ double zscore(double x, double t_value) {
         return std::abs(boost::math::quantile(boost::math::normal_distribution<double>(0, 1), x/2));
     }
     else {
-        return -1 * std::abs(boost::math::quantile(boost::math::normal_distribution<double>(0, 1), x/2)); //ìƒì„±í• ë•Œì™€ ë§Œë“¤ì–´ì ¸ìˆëŠ”ê±° ë„£ì„ë•Œ ì‹œê°„ë¹„êµí•´ë³´ê¸°.
+        return -1 * std::abs(boost::math::quantile(boost::math::normal_distribution<double>(0, 1), x/2)); //»ı¼ºÇÒ¶§¿Í ¸¸µé¾îÁ®ÀÖ´Â°Å ³ÖÀ»¶§ ½Ã°£ºñ±³ÇØº¸±â.
     }
 }
 void NICE_CPP(std::ifstream& snp, Eigen::MatrixXd& Y, std::string output, double prior_val, double priorAlpha, double priorBeta) {
@@ -131,7 +131,7 @@ void NICE_CPP(std::ifstream& snp, Eigen::MatrixXd& Y, std::string output, double
 
     int y_row = Y.rows(); int y_col = Y.cols();
     Eigen::ArrayXd P_val;
-    while (!snp.eof()) { //snpì´ë‘ phenoë¥¼ ê±°ê¾¸ë¡œ í•˜ë©´ í•´ê²°!
+    while (!snp.eof()) { //snpÀÌ¶û pheno¸¦ °Å²Ù·Î ÇÏ¸é ÇØ°á!
         P_val = Eigen::ArrayXd(y_row);
         std::cout << line_num << std::endl;
         line_num++;
@@ -184,7 +184,7 @@ void NICE_CPP2(std::ifstream& snp, Eigen::MatrixXd& Y, std::string output, doubl
     int y_row = Y.rows(); int y_col = Y.cols();
     int count = 0;
     int th_num = 0;
-    while (!snp.eof()) { //snpì´ë‘ phenoë¥¼ ê±°ê¾¸ë¡œ í•˜ë©´ í•´ê²°!
+    while (!snp.eof()) { //snpÀÌ¶û pheno¸¦ °Å²Ù·Î ÇÏ¸é ÇØ°á!
         std::cout << count << std::endl;
         count++;
         th_num = 0;
@@ -203,7 +203,7 @@ void NICE_CPP2(std::ifstream& snp, Eigen::MatrixXd& Y, std::string output, doubl
                     break;
                 }
             }
-            /*í•œì¤„*/
+            /*ÇÑÁÙ*/
 
             if (end != 1) {
                 th_ret[i] = std::async(std::launch::async, thread_func, temp_vec, y_row, y_col, std::ref(Y), prior_val, priorAlpha, priorBeta, 0);
@@ -628,48 +628,6 @@ double makeRandomDouble() {
 }
 
 Eigen::MatrixXd read_mat(std::ifstream& input_file, int row, int col) {
-        std::string read_buffer;
-        std::string token;
-        std::stringstream stream;
-        Eigen::MatrixXd ret_mat = Eigen::MatrixXd(row, col);
-        if (input_file.is_open() == false) {
-                exit(1);
-        }
-        for (int i = 0; i < row; i++) { //row
-                std::getline(input_file, read_buffer);
-                double missing_value = 0.0;
-                double count = 0;
-                double sum = 0;
-
-                stream.str(read_buffer);
-                for (int j = 0; j < col; j++) { //col
-                        stream >> token;
-                        if (token == "NA") {
-                                
-                        }
-                        else {
-                                sum = sum + std::stold(token);
-                                count++;
-                        }
-                }
-                stream.clear();
-                missing_value = sum / count;
-                stream.str(read_buffer);
-                for (int j = 0; j < col; j++) { //col
-                        stream >> token;
-                        if (token != "NA") {
-                                ret_mat(i, j) = std::stold(token);
-                        }
-                        else {
-                                ret_mat(i, j) = missing_value;
-                        }
-                }
-                stream.clear();  //for coursor reset
-        }
-        return ret_mat;
-}
-/*
-Eigen::MatrixXd read_mat(std::ifstream& input_file, int row, int col) {
 
     std::string read_buffer;
     std::string token;
@@ -686,7 +644,7 @@ Eigen::MatrixXd read_mat(std::ifstream& input_file, int row, int col) {
     }
     return ret_mat;
 }
-*/
+
 double** read_mat_darray(std::ifstream& input_file, int row, int col) {
 
     std::string read_buffer;
@@ -753,7 +711,7 @@ void emma_eigen_L_wo_Z(Eigen::MatrixXd& Kinship, Eigen::SelfAdjointEigenSolver<E
     eig_L.compute(Kinship);
 }
 
-void emma_eigen_R_wo_Z(Eigen::MatrixXd& Kinship, Eigen::MatrixXd& X, Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd>& eig_R, int indi) { //XëŠ” 2ì»¬ëŸ¼ ë§¤íŠ¸ë¦­ìŠ¤ë¡œ ì²«ì»¬ëŸ¼ì€ ë¬´ì¡°ê±´ 1
+void emma_eigen_R_wo_Z(Eigen::MatrixXd& Kinship, Eigen::MatrixXd& X, Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd>& eig_R, int indi) { //X´Â 2ÄÃ·³ ¸ÅÆ®¸¯½º·Î Ã¹ÄÃ·³Àº ¹«Á¶°Ç 1
     Eigen::MatrixXd unit_mat; unit_mat.setIdentity(indi, indi);
     Eigen::MatrixXd S = unit_mat - X * (X.transpose() * X).inverse() * X.transpose();
     Eigen::MatrixXd eig = S * (Kinship + unit_mat) * S;
@@ -776,7 +734,7 @@ double uniroot_emma_delta_REML_dLL_wo_Z(double a, double b, Eigen::Map<Eigen::Ar
     double c;
     int m = 0;
     while (std::abs((b - a)) > 0.0001220703125) {
-        //ë°˜ë¶„ë²•ìœ¼ë¡œ í•˜ë©´ ê³„ì‚°ê°’ì´ ë‹¤ë¦„.. ë‹¤ë¥¸ ë°©ì‹ êµ¬í˜„ í•„ìš”
+        //¹İºĞ¹ıÀ¸·Î ÇÏ¸é °è»ê°ªÀÌ ´Ù¸§.. ´Ù¸¥ ¹æ½Ä ±¸Çö ÇÊ¿ä
         m++;
         c = (a + b) / 2;
         if (emma_delta_REML_dLL_wo_Z(a, eig_value, etas, etasq) * emma_delta_REML_dLL_wo_Z(c, eig_value, etas, etasq) < 0 && m < 1000) {
@@ -828,7 +786,7 @@ void emma_REMLE(Eigen::ArrayXd& y, Eigen::MatrixXd& x, Eigen::MatrixXd& K, Eigen
     for (int i = 0; i < m; i++) {
         Lambdas.col(i) = eigenvalues + exp_logdelta(i);
     }
-    Eigen::ArrayXd Etasq = etas_98.square(); //ë§¤íŠ¸ë¦­ìŠ¤ í•„ìš”ê°€ì—†ìŒ.
+    Eigen::ArrayXd Etasq = etas_98.square(); //¸ÅÆ®¸¯½º ÇÊ¿ä°¡¾øÀ½.
     Eigen::MatrixXd Eta_Lambdas = Eigen::MatrixXd(indi - 2, m);
     Eigen::MatrixXd Eta_Lambdas_sqr = Eigen::MatrixXd(indi - 2, m);
     for (int i = 0; i < m; i++) {
@@ -935,7 +893,7 @@ void emma(Eigen::MatrixXd& X, Eigen::MatrixXd& Y, Eigen::MatrixXd& K, std::ofstr
         emma_REMLE(Y_row, X_0, K, eig_R1, rem, 100);
 
         Eigen::ArrayXd U_sqrt_egv = (1 / (eig_L.eigenvalues().reverse().array() + rem.delta)).sqrt().array();
-        Eigen::MatrixXd U = Eigen::MatrixXd(100, 100);// ë‚˜ì¤‘ì— ë³€ìˆ˜í•˜ë‚˜ ì§€ì •
+        Eigen::MatrixXd U = Eigen::MatrixXd(100, 100);// ³ªÁß¿¡ º¯¼öÇÏ³ª ÁöÁ¤
         for (int j = 0; j < 100; j++) {
             U.col(j) = eig_L.eigenvectors().col(99 - j) * U_sqrt_egv(j);
         }
@@ -972,7 +930,7 @@ Eigen::ArrayXd emma2(Eigen::MatrixXd& X, Eigen::MatrixXd& Y, Eigen::MatrixXd& K,
         emma_REMLE(Y_row, X_0, K, eig_R1, rem, 100);
 
         Eigen::ArrayXd U_sqrt_egv = (1 / (eig_L.eigenvalues().reverse().array() + rem.delta)).sqrt().array();
-        Eigen::MatrixXd U = Eigen::MatrixXd(100, 100);// ë‚˜ì¤‘ì— ë³€ìˆ˜í•˜ë‚˜ ì§€ì •
+        Eigen::MatrixXd U = Eigen::MatrixXd(100, 100);// ³ªÁß¿¡ º¯¼öÇÏ³ª ÁöÁ¤
         for (int j = 0; j < 100; j++) {
             U.col(j) = eig_L.eigenvectors().col(99 - j) * U_sqrt_egv(j);
         }
@@ -1400,7 +1358,7 @@ double cal_median(std::vector<double> col) {
     return median;
 }
 
-std::vector<std::string> Gamma_cpp(Eigen::MatrixXd& Kx, Eigen::MatrixXd& Ky, int thread_index, int thread_num) {
+std::vector<std::string> Gamma_cpp(Eigen::MatrixXd& Kx, Eigen::MatrixXd& Ky, int thread_index, int thread_num, int permutation_num) {
     int Kx_cols = Kx.cols();    int Kx_rows = Kx.rows();
     int Ky_cols = Ky.cols();    int Ky_rows = Ky.rows();
     int start, end;
@@ -1419,7 +1377,8 @@ std::vector<std::string> Gamma_cpp(Eigen::MatrixXd& Kx, Eigen::MatrixXd& Ky, int
     Eigen::MatrixXd UX_Q = Eigen::MatrixXd(Ky_rows, 2);
 
     std::vector<std::string> ret;
-    
+
+    //calculate dissimilarity ^2 dmat
     Eigen::MatrixXd dis_Ky(Ky_rows, Ky_rows);
     Eigen::MatrixXd dmat(Ky_rows, Ky_rows);
 
@@ -1437,7 +1396,7 @@ std::vector<std::string> Gamma_cpp(Eigen::MatrixXd& Kx, Eigen::MatrixXd& Ky, int
     }
 
     Eigen::MatrixXd G = -(dmat.colwise() - dmat.rowwise().mean()) / 2;
-    
+
     for (int z = start; z < end; z++) {
         //std::cout << "z = " << z << std::endl;
 
@@ -1460,24 +1419,7 @@ std::vector<std::string> Gamma_cpp(Eigen::MatrixXd& Kx, Eigen::MatrixXd& Ky, int
         //    }
         //}
 
-        //calculate dissimilarity ^2 dmat
-/*      Eigen::MatrixXd dis_Ky(Ky_rows, Ky_rows);
-        Eigen::MatrixXd dmat(Ky_rows, Ky_rows);
 
-        for (int i = 0; i < Ky_rows; i++) {
-            for (int k = 0; k < Ky_rows; k++) {
-                double sum1 = 0.0;
-                double sum2 = 0.0;
-                for (int p = 0; p < Ky_cols; p++) {
-                    sum1 = sum1 + std::abs(Ky(i, p) - Ky(k, p));
-                    sum2 = sum2 + Ky(i, p) + Ky(k, p);
-                }
-                dis_Ky(i, k) = sum1 / sum2;
-                dmat(i, k) = dis_Ky(i, k) * dis_Ky(i, k);
-            }
-        }
-
- */     
         double ss_exp_comb = 0.0;
 
         for (int i = 0; i < Ky_rows; i++) {
@@ -1507,7 +1449,7 @@ std::vector<std::string> Gamma_cpp(Eigen::MatrixXd& Kx, Eigen::MatrixXd& Ky, int
 
         double S1_xx = 0.0; double S1_xy = 0.0;
         double S2_xx = 0.0; double S2_xy = 0.0;
-
+        
         double S1_x_mean = UX.col(1).mean();
         double S1_y_mean = dis_Ky.col(0).mean();
 
@@ -1527,7 +1469,7 @@ std::vector<std::string> Gamma_cpp(Eigen::MatrixXd& Kx, Eigen::MatrixXd& Ky, int
         //	std::cout << "b0 " << b0 << std::endl;
 
         double p_val = 0.0;
-        for (int perm = 2; perm < 9; perm++) {
+        for (int perm = 2; perm <= permutation_num; perm++) {
             int permute_num = std::pow(10, perm);
             //std::cout << "permute_num is " << permute_num << std::endl;
             Eigen::MatrixXi permutation = Eigen::MatrixXi(permute_num, Ky_rows);
@@ -1578,10 +1520,10 @@ std::vector<std::string> Gamma_cpp(Eigen::MatrixXd& Kx, Eigen::MatrixXd& Ky, int
 }
 
 Eigen::MatrixXd calculate_kinship(const Eigen::MatrixXd& X, int chunk_size) {
-    size_t computeSize = chunk_size; // í•œ ë²ˆì— ê³„ì‚°í•  SNP ìˆ˜
+    size_t computeSize = chunk_size; // ÇÑ ¹ø¿¡ °è»êÇÒ SNP ¼ö
     std::cout << X.rows() << std::endl;
-    Eigen::MatrixXd W(X.cols(), computeSize); // ì¹œì²™ ê´€ê³„ í–‰ë ¬ W
-    Eigen::MatrixXd K; // ìµœì¢… ì¹œì²™ ê´€ê³„ í–‰ë ¬
+    Eigen::MatrixXd W(X.cols(), computeSize); // Ä£Ã´ °ü°è Çà·Ä W
+    Eigen::MatrixXd K; // ÃÖÁ¾ Ä£Ã´ °ü°è Çà·Ä
 
     size_t numSNPs = X.rows();
     size_t snp_index = 0;
@@ -1595,7 +1537,7 @@ Eigen::MatrixXd calculate_kinship(const Eigen::MatrixXd& X, int chunk_size) {
 
             //SNP snp = iterator.next();
             double snp_variance = (X.row(snp_index).array() - X.row(snp_index).mean()).square().mean();
-            if (snp_variance == 0) { // ë³€ë™ì„±ì´ 0ì´ë©´ ê±´ë„ˆëœ€
+            if (snp_variance == 0) { // º¯µ¿¼ºÀÌ 0ÀÌ¸é °Ç³Ê¶Ü
                 snp_index++;
                 continue;
             }
@@ -1603,22 +1545,22 @@ Eigen::MatrixXd calculate_kinship(const Eigen::MatrixXd& X, int chunk_size) {
             stdDev = (X.row(snp_index).array() - mean).square().mean();
             stdDev = std::sqrt(stdDev);
 
-            //W.col(j) = Eigen::VectorXd::Map(snp.data.data(), snp.data.size()); // SNP ë°ì´í„°ë¥¼ Wì— ì €ì¥
-            W.col(j) = (X.row(snp_index).array() - mean) / stdDev; // í‘œì¤€í™”ëœ SNP ë°ì´í„° Wì— ì €ì¥
-//            W.col(j) = X.row(snp_index); // SNP ë°ì´í„°ë¥¼ Wì— ì €ì¥
+            //W.col(j) = Eigen::VectorXd::Map(snp.data.data(), snp.data.size()); // SNP µ¥ÀÌÅÍ¸¦ W¿¡ ÀúÀå
+            W.col(j) = (X.row(snp_index).array() - mean) / stdDev; // Ç¥ÁØÈ­µÈ SNP µ¥ÀÌÅÍ W¿¡ ÀúÀå
+//            W.col(j) = X.row(snp_index); // SNP µ¥ÀÌÅÍ¸¦ W¿¡ ÀúÀå
             snp_index++;
             j++;
         }
         if (j < computeSize) {
-            W = W.leftCols(j).eval(); // Wì˜ ì—´ ìˆ˜ë¥¼ jë¡œ ì¡°ì •
+            W = W.leftCols(j).eval(); // WÀÇ ¿­ ¼ö¸¦ j·Î Á¶Á¤
         }
 
-        if (K.size() == 0) { // Kê°€ ì´ˆê¸°í™”ë˜ì§€ ì•Šì€ ê²½ìš°
-            K = (W * W.transpose()); // K ê³„ì‚°
+        if (K.size() == 0) { // K°¡ ÃÊ±âÈ­µÇÁö ¾ÊÀº °æ¿ì
+            K = (W * W.transpose()); // K °è»ê
         }
         else {
-            Eigen::MatrixXd K_j = (W * W.transpose()); // K_j ê³„ì‚°
-            K += K_j; // Kì— K_j ì¶”ê°€
+            Eigen::MatrixXd K_j = (W * W.transpose()); // K_j °è»ê
+            K += K_j; // K¿¡ K_j Ãß°¡
         }
     }
     return K / static_cast<float>(numSNPs);

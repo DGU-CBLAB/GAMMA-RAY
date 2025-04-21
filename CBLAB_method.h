@@ -4,12 +4,13 @@
 #define log_sqrt2pi 0.5 * std::log(2 * std::atan(1) * 4)
 #define _USE_MATH_DEFINES
 
-#include <Eigen/QR>
-#include <Eigen/Core>
-#include <Eigen/Dense>
-#include <Eigen/LU>
-#include <Eigen/Eigenvalues>
-#include <unsupported/Eigen/MatrixFunctions>
+#include "Eigen/Eigen/QR"
+#include "Eigen/Eigen/Core"
+#include "Eigen/Eigen/Dense"
+#include "Eigen/Eigen/LU"
+#include "Eigen/Eigen/Eigenvalues"
+#include "Eigen/unsupported/Eigen/MatrixFunctions"
+#include "cxxopts.hpp"
 
 #include <ctime>
 #include <iostream>
@@ -35,6 +36,7 @@
 #include <boost/math/special_functions/erf.hpp>
 #include <boost/math/distributions/inverse_gaussian.hpp>
 #include <boost/math/special_functions/beta.hpp>
+
 
 #define MAXNSEC 1000 // maximum number of sections for scaling factor
 #define EIGEN_EPS 1E-10 // epsilon to add to the matrix diagonal
@@ -197,7 +199,7 @@ long double t_value(boost::math::students_t_distribution<double> t_dist, long do
 
 void NICE_CPP(std::ifstream& snp, Eigen::MatrixXd& Y, std::string output, double prior_val, double priorAlpha, double priorBeta);
 void NICE_CPP2(std::ifstream& snp, Eigen::MatrixXd& Y, std::string output, double prior_val, double priorAlpha, double priorBeta, int thread_num);
-std::vector<std::string> Gamma_cpp(Eigen::MatrixXd& Kx, Eigen::MatrixXd& Ky, int thread_index, int thread_num);
+std::vector<std::string> Gamma_cpp(Eigen::MatrixXd& Kx, Eigen::MatrixXd& Ky, int thread_index, int thread_num, int permutation_num);
 
 void computeMvaluesMCMC(double* betas, double* std_, double* std_tm, double* std_tmm, double* std_logt, double* logProbNullPoints_, int sample, int pheno_num, std::string X, Eigen::MatrixXd& Y, Eigen::ArrayXd& P_val, std::ofstream& NICE, double prior_val, double priorAlpha, double priorBeta, int seed = 0);
 Eigen::ArrayXd computeMvaluesMCMC2(double* betas, double* std_, double* std_tm, double* std_tmm, double* std_logt, double* logProbNullPoints_, int sample, int pheno_num, std::string X, Eigen::MatrixXd& Y, Eigen::ArrayXd& P_val, double prior_val, double priorAlpha, double priorBeta, int seed = 0);
