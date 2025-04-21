@@ -7,7 +7,7 @@ Original GAMMA paper -> https://doi.org/10.1534/genetics.116.189712
 
 1. GAMMA_cpp
 ```
-git clone https://github.com/taegun89/Gamma_cpp.git
+git clone https://github.com/DGU-CBLAB/Gamma_cpp.git
 ```
 
 2. Eigen library
@@ -34,9 +34,9 @@ cd ./Gamma_cpp
 g++ -O2 -DNDEBUG -pthread -std=c++14 -I ../eigen-3.4.0/ -I ../boost_1_86_0/ ./Gamma_main.cpp ./CBLAB_method.cpp -o Gamma_cpp
 ```
 4. Run
-   Gamm_cpp <Genotype file> <Phenotypes file> <threadNums> <output> 
+   Gamm_cpp -x x_file_path -y y_file_path -o output_path -t thread_number -p permutation_number 
 ```bash 
-./Gamma_cpp ./sample_data/X.txt ./sample_data/Y.txt 1 ./result.txt
+./Gamma_cpp -x ./sample_data/X.txt -y ./sample_data/Y.txt -o ./result.txt -t 1 -p 4
 ```
 
 5. Result
