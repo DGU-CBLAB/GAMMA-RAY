@@ -4,12 +4,12 @@
 #define log_sqrt2pi 0.5 * std::log(2 * std::atan(1) * 4)
 #define _USE_MATH_DEFINES
 
-#include "Eigen/Eigen/QR"
-#include "Eigen/Eigen/Core"
-#include "Eigen/Eigen/Dense"
-#include "Eigen/Eigen/LU"
-#include "Eigen/Eigen/Eigenvalues"
-#include "Eigen/unsupported/Eigen/MatrixFunctions"
+#include "Eigen/QR"
+#include "Eigen/Core"
+#include "Eigen/Dense"
+#include "Eigen/LU"
+#include "Eigen/Eigenvalues"
+#include "unsupported/Eigen/MatrixFunctions"
 #include "cxxopts.hpp"
 
 #include <ctime>
