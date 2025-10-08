@@ -3,7 +3,7 @@
 
 int main(int argc, char** argv) {
 
-	cxxopts::Options options("Gamma_cpp", "A GAMMA analysis tool written in C++");
+	cxxopts::Options options("GAMMA-RAY", "A GAMMA analysis tool written in C++");
 
 	options.add_options()
 		("x,input_x", "Path to input Genotpye file", cxxopts::value<std::string>())
@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 	std::cout << "Threads: " << thread_num << "\n";
 	std::cout << "Permutations: " << permutation_num << "\n";
 
-	// º» ÇÁ·Î±×·¥ ·ÎÁ÷...
+	// ÂºÂ» Ã‡ÃÂ·ÃŽÂ±Ã—Â·Â¥ Â·ÃŽÃÃ·...
 	std::vector<double> vc_1;
 	std::vector<double> vc_2;
 
@@ -103,4 +103,5 @@ int main(int argc, char** argv) {
 	input_y.close();
 	output.close();
 	return 0;
+
 }
