@@ -31,12 +31,12 @@ tar -zxvf ./boost_1_86_0.tar.gz
 cd ./GAMMA-RAY
 ```
 ```
-g++ -O2 -DNDEBUG -pthread -std=c++14 -I ../eigen-3.4.0/ -I ../boost_1_86_0/ ./Gamma_main.cpp ./CBLAB_method.cpp -o Gamma_cpp
+g++ -O2 -DNDEBUG -pthread -std=c++14 -I ../eigen-3.4.0/ -I ../boost_1_86_0/ ./Gamma_main.cpp ./CBLAB_method.cpp -o GAMMA-RAY
 ```
 4. Run
-   Gamm_cpp -x x_file_path -y y_file_path -o output_path -t thread_number -p permutation_number 
+   GAMMA-RAY -x x_file_path -y y_file_path -o output_path -t thread_number -p permutation_number 
 ```bash 
-./Gamma_cpp -x ./sample_data/X.txt -y ./sample_data/Y.txt -o ./result.txt -t 1 -p 4
+./GAMMA-RAY -x ./sample_data/X.txt -y ./sample_data/Y.txt -o ./result.txt -t 1 -p 4
 ```
 
 5. Result
