@@ -1,13 +1,13 @@
-# GAMMA_cpp
+# GAMMA-RAY
 
 c++ version of GAMMA(made by Jong Wha J. Joo)<br> 
 Original GAMMA paper -> https://doi.org/10.1534/genetics.116.189712
 
 ### Prerequisites
 
-1. GAMMA_cpp
+1. GAMMA-RAY
 ```
-git clone https://github.com/DGU-CBLAB/Gamma_cpp.git
+git clone https://github.com/DGU-CBLAB/GAMMA-RAY.git
 ```
 
 2. Eigen library
@@ -28,7 +28,7 @@ tar -zxvf ./boost_1_86_0.tar.gz
 
 - Compile
 ```
-cd ./Gamma_cpp
+cd ./GAMMA-RAY
 ```
 ```
 g++ -O2 -DNDEBUG -pthread -std=c++14 -I ../eigen-3.4.0/ -I ../boost_1_86_0/ ./Gamma_main.cpp ./CBLAB_method.cpp -o Gamma_cpp
