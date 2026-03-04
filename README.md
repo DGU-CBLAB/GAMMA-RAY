@@ -66,7 +66,7 @@ docker run -it \
   -e GAMMA_RAY_username=your_username \
   -e GAMMA_RAY_passwd=your_password \
   -p 8080:80 \
-  taegun89/marsweb:latest
+  taegun89/gamma-ray:latest
 ```
 
 ### Start Tomcat Server
@@ -75,5 +75,5 @@ To run the Docker container, execute the following command after starting the co
 ```
 /GAMMA-RAY/apache-tomcat-9.0.64/bin/startup.sh
 ```
-After running the command, you can access MARSweb locally at: http://localhost:8080/GAMMA-RAY
+After running the command, you can access GAMMA-RAY locally at: http://localhost:8080/GAMMA-RAY
 
