@@ -5,6 +5,7 @@ Original GAMMA paper -> https://doi.org/10.1534/genetics.116.189712
 
 ### Prerequisites
 
+## Using G++ Compiler
 1. GAMMA-RAY
 ```
 git clone https://github.com/DGU-CBLAB/GAMMA-RAY.git
@@ -43,3 +44,36 @@ g++ -O2 -DNDEBUG -pthread -std=c++14 -I ../eigen-3.4.0/ -I ../boost_1_86_0/ ./Ga
 ```
 vim ./result.txt
 ```
+
+## Using Docker 
+
+The Docker image for GAMMA-RAY can be found on Docker Hub at [taegun89/gamma-ray](https://hub.docker.com/r/taegun89/gamma-ray).
+### Prerequisites
+
+- Docker (version 19.03 or later)
+
+### Pull the Docker Image
+
+To pull the Docker image from Docker Hub, use the following command:
+
+```bash
+docker pull taegun89/gamma-ray:latest
+```
+
+### Running the Docker Contatiner
+```bash
+docker run -it \
+  -e GAMMA_RAY_username=your_username \
+  -e GAMMA_RAY_passwd=your_password \
+  -p 8080:80 \
+  taegun89/marsweb:latest
+```
+
+### Start Tomcat Server
+
+To run the Docker container, execute the following command after starting the container
+```
+/GAMMA-RAY/apache-tomcat-9.0.64/bin/startup.sh
+```
+After running the command, you can access MARSweb locally at: http://cblab.dongguk.edu:8080/GAMMA-RAY
+
