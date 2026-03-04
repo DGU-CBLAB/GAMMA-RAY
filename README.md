@@ -75,5 +75,5 @@ To run the Docker container, execute the following command after starting the co
 ```
 /GAMMA-RAY/apache-tomcat-9.0.64/bin/startup.sh
 ```
-After running the command, you can access MARSweb locally at: http://cblab.dongguk.edu:8080/GAMMA-RAY
+After running the command, you can access MARSweb locally at: http://localhost:8080/GAMMA-RAY
 
